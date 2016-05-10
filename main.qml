@@ -4,10 +4,13 @@ import QtQml 2.0
 import QtQuick.Dialogs 1.2
 
 Window {
+    id: root
+    property date currentDate: new Date()
+    property int daysRemaining: (form.selectedDay - currentDate) / 1000 / 3600 / 24 + 1
+
     width: form.width
     height: form.height
     visible: true
-    property date currentDate: new Date()
 
     FileDialog {
         id: selectImageFileDialog
@@ -32,8 +35,8 @@ Window {
 
     MainForm {
         id: form
-        daysRemaining: (selectedDay - currentDate) / 1000 / 3600 / 24 + 1
         minimumDate: currentDate
+        remainingTime: daysRemaining > 21 ? (Math.floor(daysRemaining / 7) + "w") : (daysRemaining + "d")
 
         selectImageButton.onClicked: selectImageFileDialog.open()
         saveImageButton.onClicked: saveImageFileDialog.open()

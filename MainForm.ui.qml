@@ -4,7 +4,7 @@ import QtQuick.Extras 1.4
 
 Rectangle {
     id: root
-    property int daysRemaining: -1
+    property alias remainingTime: text.text
     property alias selectedDay: calendar.selectedDate
     property alias minimumDate: calendar.minimumDate
     property alias selectImageButton: selectImageButton
@@ -23,13 +23,15 @@ Rectangle {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.top: parent.top
+        fillMode: Image.PreserveAspectCrop
 
         Drag.active: mouseArea.drag.active
 
         Text {
             id: text
             color: "#bfffe600"
-            text: daysRemaining + " d"
+            text: "-1d"
+            font.bold: true
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.bottom: parent.bottom
