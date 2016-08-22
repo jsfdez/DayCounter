@@ -36,7 +36,7 @@ Window {
     MainForm {
         id: form
         minimumDate: currentDate
-        remainingTime: daysRemaining > 21 ? (Math.floor(daysRemaining / 7) + "w") : (daysRemaining + "d")
+        remainingTime: daysRemaining > 31 ? (Math.floor(daysRemaining / 7) + "w") : (daysRemaining + "d")
 
         selectImageButton.onClicked: selectImageFileDialog.open()
         saveImageButton.onClicked: saveImageFileDialog.open()
