@@ -7,6 +7,8 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setApplicationName("DayCounter");
+    app.setOrganizationName("BilbainadaSoft");
     ImageSaver imageSaver;
 
     QQmlApplicationEngine engine;

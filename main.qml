@@ -2,6 +2,7 @@ import QtQuick 2.5
 import QtQuick.Window 2.2
 import QtQml 2.0
 import QtQuick.Dialogs 1.2
+import Qt.labs.settings 1.0
 
 Window {
     id: root
@@ -12,10 +13,15 @@ Window {
     height: form.height
     visible: true
 
+    Settings {
+        id: settings
+        property alias selectedDay: form.selectedDay
+    }
+
     FileDialog {
         id: selectImageFileDialog
         title: qsTr("Select the image file")
-        folder: shortcuts.home
+        folder: shortcuts.pictures
         nameFilters: [ "Image files (*.jpg *.png)" ]
         onAccepted: {
             form.selectedImageSource = selectImageFileDialog.fileUrl
@@ -25,7 +31,7 @@ Window {
     FileDialog {
         id: saveImageFileDialog
         title: qsTr("Select the image file")
-        folder: shortcuts.home
+        folder: shortcuts.pictures
         nameFilters: [ "PNG file (*.png)", "JPG file (*.jpg)" ]
         selectExisting: false
         onAccepted: {
@@ -36,7 +42,8 @@ Window {
     MainForm {
         id: form
         minimumDate: currentDate
-        remainingTime: daysRemaining > 31 ? (Math.floor(daysRemaining / 7) + "w") : (daysRemaining + "d")
+        remainingTime: daysRemaining > 31 ? (Math.floor(daysRemaining / 7) + "w") :
+                                            (daysRemaining + "d")
 
         selectImageButton.onClicked: selectImageFileDialog.open()
         saveImageButton.onClicked: saveImageFileDialog.open()
